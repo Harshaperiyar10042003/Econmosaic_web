@@ -1,0 +1,221 @@
+/* ============================= */
+/* GLOBAL MOBILE FIX             */
+/* ============================= */
+
+@media (max-width: 1024px) {
+    header {
+        padding: 18px 40px;
+    }
+
+    .hero h1 {
+        font-size: 42px;
+    }
+
+    .offer-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 30px;
+    }
+}
+
+
+/* ============================= */
+/* TABLET */
+/* ============================= */
+
+@media (max-width: 900px) {
+
+    header {
+        padding: 16px 25px;
+    }
+
+    nav a {
+        margin: 0 12px;
+        font-size: 15px;
+    }
+
+    .hero {
+        margin: 60px 20px;
+        padding: 30px;
+    }
+
+    .hero h1 {
+        font-size: 36px;
+        padding-left: 0;
+    }
+
+    .hero p {
+        padding-left: 0;
+    }
+
+    .btn {
+        margin-left: 0;
+    }
+
+    .offer-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .content-grid {
+        grid-template-columns: 1fr !important;
+    }
+}
+
+
+/* ============================= */
+/* MOBILE */
+/* ============================= */
+
+@media (max-width: 600px) {
+
+    header {
+        padding: 14px 15px;
+    }
+
+    nav {
+        display: none;
+    }
+
+    .login {
+        display: none;
+    }
+
+    .logo {
+        font-size: 22px;
+    }
+
+    /* HERO SECTION */
+    .hero {
+        margin: 40px 0;
+        padding: 20px;
+        border-radius: 20px;
+    }
+
+    .hero h1 {
+        font-size: 28px;
+        line-height: 1.3;
+    }
+
+    .hero p {
+        font-size: 15px;
+        line-height: 1.6;
+    }
+
+    .btn {
+        width: 100%;
+        padding: 14px;
+    }
+
+    /* OFFER CARDS */
+    .box {
+        width: 100%;
+    }
+
+    /* ARTICLES LIST PAGE */
+    .section {
+        padding: 20px 15px;
+        max-height: none !important;
+        overflow: visible !important;
+        width: 92% !important;
+        margin-top: 20px !important;
+        margin-bottom: 20px !important;
+    }
+
+    .section-header h2 {
+        font-size: 22px;
+    }
+
+    /* Stack article cards vertically */
+    .article {
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    /* Full width images */
+    .article img {
+        width: 100% !important;
+        height: 180px !important;
+        object-fit: cover;
+        border-radius: 10px;
+        flex-shrink: unset;
+    }
+
+    .article h3 {
+        font-size: 16px;
+        margin: 4px 0;
+    }
+
+    .meta {
+        font-size: 13px;
+    }
+
+    /* Hide login icon on mobile */
+    .login {
+        display: none !important;
+    }
+}
+
+
+/* ============================= */
+/* ARTICLE DETAIL PAGE FIX       */
+/* Apply class="article-page"    */
+/* to <body> in articles.html    */
+/* No changes needed to any      */
+/* individual article html files */
+/* ============================= */
+
+@media (max-width: 1200px) {
+    body:not(.article-page) {
+        padding: 0 80px !important;
+    }
+}
+
+@media (max-width: 900px) {
+    body:not(.article-page) {
+        padding: 0 40px !important;
+    }
+
+    body:not(.article-page) h1 {
+        font-size: 20px !important;
+    }
+}
+
+@media (max-width: 600px) {
+    body:not(.article-page) {
+        padding: 0 18px !important;
+        font-size: 16px !important;
+        line-height: 1.7 !important;
+    }
+
+    body:not(.article-page) h1 {
+        font-size: 18px !important;
+        margin: 16px 0 20px !important;
+    }
+
+    body:not(.article-page) p {
+        text-align: left !important;
+        margin-bottom: 14px !important;
+    }
+
+    body:not(.article-page) .author-section {
+        margin-top: 16px;
+        margin-bottom: 6px;
+    }
+
+    body:not(.article-page) .author-img {
+        width: 40px !important;
+        height: 40px !important;
+    }
+
+    body:not(.article-page) .author-name {
+        font-size: 14px !important;
+    }
+
+    body:not(.article-page) .date {
+        font-size: 12px !important;
+    }
+
+    body:not(.article-page) .reference p {
+        word-break: break-all;
+        font-size: 14px;
+    }
+}

@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Articles</title>
+<link rel="stylesheet" href="style.css">
+
+<style>
+html { scroll-behavior: smooth; }
+
+body{
+    margin:0;
+    font-family: 'Inter', Arial, sans-serif;
+    background: #f5f7fa;
+    color: #333;
+    
+}
+
+/* NAVIGATION */
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 22px 80px;
+    background: rgba(255,255,255,0.7);
+    backdrop-filter: blur(8px);
+    position: sticky;
+    top: 0;
+    z-index: 10;
+}
+
+.logo {
+    font-size: 30px;
+    font-weight: 800;
+}
+
+.logo span { color: #2C74FF; }
+
+nav a {
+    position: relative; /* needed for ::after positioning */
+    text-decoration: none;
+    color: #333;
+    margin: 0 22px;
+    font-weight: 500;
+    font-size: 17px;
+    transition: color 0.3s ease;
+}
+
+nav a::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: -4px; /* distance from text */
+    width: 0;
+    height: 3px;
+    background: linear-gradient(90deg, #ff7a18, #2C74FF, #af002d); /* gradient line */
+    border-radius: 2px;
+    transition: width 0.4s ease;
+}
+
+nav a:hover::after {
+    width: 100%; /* full underline on hover */
+}
+
+nav a:hover {
+    color: #2C74FF; /* optional text color change on hover */
+}
+
+
+.login {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 17px;
+    cursor: pointer;
+}
+
+.login img {
+    width: 24px;
+}
+
+/* ------------------ Section ------------------ */
+.section{
+    width:90%;
+    max-width:1200px;
+    margin:auto;
+    padding:35px 25px;
+    background: #fff;
+    border-radius: 12px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+    margin-bottom: 40px;
+    margin-top: 50px;
+    max-height: 520px;       /* SCROLL HEIGHT */
+    overflow-y: auto;        /* ENABLE SCROLL */
+}
+
+/* Scrollbar Styling */
+.section::-webkit-scrollbar{
+    width: 8px;
+}
+.section::-webkit-scrollbar-track{
+    background: #f1f1f1;
+    border-radius: 10px;
+}
+.section::-webkit-scrollbar-thumb{
+    background: #888;
+    border-radius: 10px;
+}
+.section::-webkit-scrollbar-thumb:hover{
+    background: #555;
+}
+
+/* Firefox */
+.section{
+    scrollbar-width: thin;
+    scrollbar-color: #888 #f1f1f1;
+}
+
+/* ------------------ Section Header ------------------ */
+.section-header{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    margin-bottom:18px;
+}
+.section-header h2{
+    font-size:32px;
+    font-weight:700;
+    font-family:"Georgia","Times New Roman",serif;
+    margin:0;
+    color: #1a1a1a;
+}
+
+/* ------------------ Grid Layout ------------------ */
+.content-grid{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    column-gap:40px;
+}
+@media(max-width:900px){
+    .content-grid{ grid-template-columns:1fr; }
+}
+
+/* ------------------ Article Card ------------------ */
+.article{
+    display:flex;
+    gap:22px;
+    margin-bottom:26px;
+    align-items:flex-start;
+    background: #fdfdfd;
+    border-radius:12px;
+    padding:12px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+.article:hover{
+    transform: translateY(-4px);
+    box-shadow: 0 8px 20px rgba(0,0,0,0.12);
+}
+
+/* ------------------ Image ------------------ */
+.article img{
+    width:230px;
+    height:150px;
+    object-fit:cover;
+    border-radius:12px;
+    background:#eee;
+    flex-shrink:0;
+}
+
+/* ------------------ Title ------------------ */
+.article h3{
+    font-size:20px;
+    font-weight:600;
+    margin:8px 0;
+    font-family:"Georgia","Times New Roman",serif;
+    color: #222;
+}
+
+/* ------------------ Underline ------------------ */
+.article .line{
+    width:100%;
+    height:1px;
+    background:#ddd;
+    margin-bottom:8px;
+}
+
+/* ------------------ Meta ------------------ */
+.meta{
+    display:flex;
+    align-items:center;
+    gap:8px;
+    font-size:14px;
+    color:#555;
+}
+.meta i{
+    font-size:16px;
+    color:#070707;
+}
+
+/* ------------------ Divider ------------------ */
+.section-divider{
+    height:1px;
+    background:#e0e0e0;
+    margin:20px 0;
+}
+
+/* ------------------ Links ------------------ */
+a{
+    text-decoration:none;
+    color:inherit;
+}
+
+/* ------------------ Responsive ------------------ */
+@media(max-width:600px){
+    body{ padding:30px 20px; }
+    .section{ padding:25px 15px; max-height: none; }
+    .article img{ width:150px; height:100px; }
+    .article h3{ font-size:16px; }
+}
+</style>
+<link rel="stylesheet" href="style.css">
+</head>
+
+<body class="article-page">
+
+    <header>
+    <div class="logo">econ<span>mosaic</span></div>
+
+    <nav>
+        <a href="index.html">Home</a>
+        <a href="articles.html">Articles</a>
+        <a href="#">Magazines</a>
+        <a href="#">More</a>
+    </nav>
+
+    <div class="login">
+        <img src="https://cdn-icons-png.flaticon.com/512/847/847969.png">
+        Log In
+    </div>
+</header>
+
+<script>
+
+function articleHTML(title, img, link, date, year){
+    return `
+    <div class="article">
+        <a href="${link}">
+            <img src="${img}">
+        </a>
+        <div>
+            <a href="${link}">
+                <h3>${title}</h3>
+            </a>
+            <div class="line"></div>
+            <div class="meta">
+                <i class="fa-regular fa-calendar"></i>
+                <span>${date}/${year || 2025}</span>
+            </div>
+        </div>
+    </div>
+    `;
+}
+
+
+function renderSection(title, articles){
+
+    // ✅ SORT BY MOST RECENT DATE FIRST
+    articles.sort((a, b) => {
+    const dateA = parseDate(a.date, a.year); // use year if present
+    const dateB = parseDate(b.date, b.year);
+    return dateB - dateA; // most recent first
+});
+
+
+    const sectionId = title.replace(/\s+/g,'-').toLowerCase();
+
+    let html = `
+    <div class="section" id="${sectionId}">
+        <div class="section-header">
+            <h2>${title}</h2>
+        </div>
+        <div class="content-grid">`;
+
+    const col1 = [], col2 = [];
+
+   articles.forEach((a, i) => {
+    const card = articleHTML(a.title, a.img, a.link, a.date, a.year);
+    if(i % 2 === 0) col1.push(card);
+    else col2.push(card);
+});
+
+
+    html += `<div>${col1.join('')}</div><div>${col2.join('')}</div>`;
+    html += `</div></div><div class="section-divider"></div>`;
+
+    document.write(html);
+}
+
+
+
+function parseDate(d, yearOverride) {
+    const [day, month] = d.split('/');
+    // If yearOverride is provided, use it; otherwise, default to 2025
+    return new Date(yearOverride || 2025, month - 1, day);
+}
+
+// Example usage:
+const date1 = parseDate("05/01", 2026); // This document → 2026
+const date2 = parseDate("12/11");  // Other documents → 2025
+
+</script>
+
+<script>
+renderSection(
+"International Economy & Global Affairs",
+[
+ { title:"Gen Z Protests", img:"images/Ramapriya oct.png", link:"ramapriya.html", date:"01/11" },
+ { title:"Global Growth in Uncertainty – IMF Warns of Risks", img:"images/vidhya oct.png", link:"vidhyaa.html", date:"04/11" },
+ { title:"The Next Chapter in U.S. Diplomacy", img:"images/vidhya dec.jpeg", link:"vidhyaa_dec.html", date:"28/12" },
+ { title:"India - New Zealand Free Trade Agreement", img:"images/lavanya dec.png", link:"lavanya_dec.html", date:"28/12" },
+ { title:"Venezuela oil blockade", img:"images/Rama Dec.png", link:"ramapriya_dec.html", date:"27/12" },
+ { title:"India and Qatar set path to double trade by 2030", img:"images/lavanya oct.png", link:"lavanya priya.html", date:"27/12" },
+ { title:"Charting a Commercial Cosmos – Economic Revolution in Orbit", img:"images/Mukul 1 oct.png", link:"mukulsharma1.html", date:"26/10" }
+]
+);
+
+renderSection(
+"Indian Economy (National Issues, Policies, Govt.)",
+
+[
+ { title:"Calculation error by RBI", img:"images/Deepak Pradeep oct.png", link:"deepak.html", date:"26/10" },
+ { title:"Role of Kudumbashree", img:"images/Afrin oct.png", link:"afrin.html", date:"26/10" },
+ { title:"Bihar Election Logistics", img:"images/Carol oct.png", link:"carol.html", date:"28/10" },
+ { title:"Labour Codes implementation in India", img:"images/Anbu Dec.png", link:"anbuarasu_dec.html", date:"28/12" },
+ { title:"India’s Sports Economy: From Passion to a Multi-Billion-Dollar Growth Engine", img:"images/Sugi Dec.png", link:"sugirdaraj_dec.html", date:"27/12" },
+ { title:"privacy in danger", img:"images/Deepak Dec.png", link:"deepak_dec.html", date:"30/12" },
+ { title:"THE MONEY REVOLUTION: How UPI Triggered India’s Greatest Investment Awakening", img:"images/Bharathi 3 Dec.png", link:"images/bharathi_dec.pdf", date:"05/01", year:2026  },
+ { title:"The Social Political Analysis of Water Conflicts", img:"images/Vaishnavi oct.png", link:"vaishnavi.html", date:"26/10" },
+ { title:"Hurdles of an Automobile Capital", img:"images/Akash oct.png", link:"akash.html", date:"27/10" }
+]
+);
+
+renderSection(
+"Business & Industry",
+[
+ { title:"Maggi Crisis Case Study", img:"images/Bhrathi 5 oct.png", link:"bharathi.html", date:"23/10" },
+ { title:"Case Study on Lenskart", img:"images/shenika.jpeg", link:"shenika.html", date:"27/10" }
+]
+);
+
+
+
+
+
+renderSection(
+"Environment & Sustainability (Climate, Energy, Resources)",
+[
+ { title:"Food Loss and Waste and Climate Action (SDGs)", img:"images/Mukul oct.png", link:"mukulsharma2.html", date:"23/10" },
+ { title:"Green Finance", img:"images/Krishna mohan  oct.png", link:"krishnamohan.html", date:"23/10" },
+ { title:"Doughnut Economics", img:"images/Krishna mohan Dec.png", link:"krishnamohan_dec.html", date:"27/12" },
+ { title:"Green Crackers: Are Festivals Getting Cleaner?", img:"images/vidhya oct.png", link:"vidhyaa2.html", date:"23/10" },
+ { title:"Green Energy Push in November 2025, Strengthens India’s Transition to Sustainable Energy", img:"images/Afrin dec.png", link:"afrin_dec.html", date:"27/12" },
+ { title:"From Palm to Cane : the Economic story behind Tamil Nadu’s sugar shift", img:"images/Vishnu 1  Dec.png", link:"vishnuvarthan_dec.html", date:"27/12" },
+ { title:"Transit-Oriented Development for Urban Sustainability", img:"images/Vaishnavi Dec.png", link:"vaishnavi_dec.html", date:"27/12" }
+ 
+]
+);
+
+
+</script>
+
+</body>
+</html>

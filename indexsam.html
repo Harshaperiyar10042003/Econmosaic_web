@@ -1,0 +1,702 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>EconMosaic</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;0,800;1,400;1,700&family=DM+Sans:wght@300;400;500;600&family=DM+Serif+Display:ital@0;1&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+<style>
+:root {
+  --bg: #111110;
+  --bg2: #18171A;
+  --bg3: #1f1e22;
+  --gold: #C9A96E;
+  --gold-light: #E2C98A;
+  --cream: #F0EAD6;
+  --cream-dim: #c8bfa8;
+  --white: #ffffff;
+  --muted: #888;
+  --border: rgba(201,169,110,0.18);
+  --border-subtle: rgba(255,255,255,0.07);
+  --navy: #1a2644;
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: 'DM Sans', sans-serif;
+  background: var(--bg);
+  color: var(--cream);
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+/* ── HEADER ── */
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 64px;
+  height: 70px;
+  background: rgba(17,17,16,0.92);
+  backdrop-filter: blur(12px);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  border-bottom: 1px solid var(--border-subtle);
+}
+
+.logo {
+  font-family: 'Playfair Display', serif;
+  font-size: 26px;
+  font-weight: 700;
+  letter-spacing: -0.5px;
+  color: var(--cream);
+}
+.logo span { color: var(--gold); font-style: italic; }
+
+nav { display: flex; align-items: center; gap: 8px; }
+nav a {
+  position: relative;
+  text-decoration: none;
+  color: var(--cream-dim);
+  padding: 8px 16px;
+  font-size: 15px;
+  font-weight: 500;
+  letter-spacing: 0.2px;
+  transition: color 0.3s;
+}
+nav a::after {
+  content: '';
+  position: absolute;
+  left: 16px; right: 16px;
+  bottom: 4px;
+  height: 1px;
+  background: var(--gold);
+  transform: scaleX(0);
+  transition: transform 0.3s ease;
+}
+nav a:hover { color: var(--gold-light); }
+nav a:hover::after { transform: scaleX(1); }
+
+.login-btn {
+  display: flex; align-items: center; gap: 8px;
+  padding: 8px 20px;
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  color: var(--cream-dim);
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.3s;
+  background: transparent;
+}
+.login-btn:hover { border-color: var(--gold); color: var(--gold); }
+.login-btn img { width: 18px; filter: brightness(0.6); }
+
+/* ── HERO ── */
+.hero-grid {
+  display: grid;
+  grid-template-columns: 1fr 1px 1fr 1px 1fr;
+  min-height: calc(100vh - 70px);
+  border-bottom: 1px solid var(--border-subtle);
+}
+
+.hero-left {
+  padding: 72px 60px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  border-right: 1px solid var(--border-subtle);
+}
+
+.hero-eyebrow {
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 28px;
+}
+
+.hero-title {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(48px, 5.5vw, 72px);
+  font-weight: 800;
+  line-height: 1.05;
+  color: var(--white);
+  margin-bottom: 28px;
+}
+.hero-title em {
+  font-style: italic;
+  color: var(--gold);
+}
+
+.hero-desc {
+  font-size: 16px;
+  line-height: 1.75;
+  color: var(--cream-dim);
+  max-width: 480px;
+  margin-bottom: 48px;
+}
+
+.hero-actions { display: flex; gap: 16px; flex-wrap: wrap; }
+
+.btn-primary {
+  padding: 14px 28px;
+  background: var(--cream);
+  color: var(--bg);
+  font-size: 14px;
+  font-weight: 600;
+  letter-spacing: 0.3px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  text-decoration: none;
+  display: inline-flex; align-items: center; gap: 8px;
+  transition: all 0.3s;
+}
+.btn-primary:hover { background: var(--gold-light); }
+
+.btn-outline {
+  padding: 14px 28px;
+  background: transparent;
+  color: var(--cream-dim);
+  font-size: 14px;
+  font-weight: 500;
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  cursor: pointer;
+  text-decoration: none;
+  display: inline-flex; align-items: center; gap: 8px;
+  transition: all 0.3s;
+}
+.btn-outline:hover { border-color: var(--gold); color: var(--gold); }
+
+/* ── FEATURE GRID (right side of hero) ── */
+.hero-right {
+  grid-column: 3 / 6;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 1fr 1fr;
+}
+
+.feature-cell {
+  padding: 44px 40px;
+  border-bottom: 1px solid var(--border-subtle);
+  border-right: 1px solid var(--border-subtle);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  min-height: 240px;
+  cursor: pointer;
+  text-decoration: none;
+  color: inherit;
+  transition: background 0.3s;
+  position: relative;
+  overflow: hidden;
+}
+.feature-cell:hover { background: rgba(201,169,110,0.04); }
+.feature-cell:nth-child(2n) { border-right: none; }
+
+.feature-icon { font-size: 28px; margin-bottom: auto; opacity: 0.85; }
+
+.feature-cat {
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 10px;
+  margin-top: 28px;
+}
+
+.feature-title {
+  font-family: 'Playfair Display', serif;
+  font-size: 20px;
+  font-weight: 700;
+  line-height: 1.3;
+  color: var(--cream);
+}
+
+.feature-arrow {
+  position: absolute;
+  bottom: 20px;
+  right: 24px;
+  font-size: 18px;
+  color: var(--gold);
+  opacity: 0;
+  transform: translateX(-6px);
+  transition: all 0.3s;
+}
+.feature-cell:hover .feature-arrow { opacity: 1; transform: translateX(0); }
+
+/* ── MARQUEE ── */
+.marquee-wrap {
+  overflow: hidden;
+  border-top: 1px solid var(--border-subtle);
+  border-bottom: 1px solid var(--border-subtle);
+  padding: 14px 0;
+  background: var(--bg2);
+}
+.marquee-track {
+  display: flex;
+  gap: 60px;
+  white-space: nowrap;
+  animation: marquee 30s linear infinite;
+}
+.marquee-track span {
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--muted);
+  flex-shrink: 0;
+}
+.marquee-track span em { color: var(--gold); font-style: normal; }
+@keyframes marquee {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+/* ── WHAT WE OFFER ── */
+.section {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 100px 64px;
+}
+
+.section-label {
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 4px;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 16px;
+}
+
+.section-heading {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(32px, 3.5vw, 48px);
+  font-weight: 700;
+  line-height: 1.15;
+  color: var(--white);
+  margin-bottom: 64px;
+}
+.section-heading em { font-style: italic; color: var(--gold); }
+
+/* Category cards */
+.cat-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 2px;
+  background: var(--border-subtle);
+  border: 1px solid var(--border-subtle);
+}
+
+.cat-card {
+  background: var(--bg2);
+  padding: 48px 36px;
+  display: flex;
+  flex-direction: column;
+  text-decoration: none;
+  color: inherit;
+  transition: all 0.35s ease;
+  position: relative;
+  overflow: hidden;
+  min-height: 320px;
+}
+.cat-card::before {
+  content: '';
+  position: absolute;
+  bottom: 0; left: 0; right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, var(--gold), transparent);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.4s ease;
+}
+.cat-card:hover { background: #1e1c20; transform: translateY(-4px); }
+.cat-card:hover::before { transform: scaleX(1); }
+
+.cat-emoji { font-size: 36px; margin-bottom: 32px; }
+
+.cat-number {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 3px;
+  color: var(--gold);
+  margin-bottom: 12px;
+  text-transform: uppercase;
+}
+
+.cat-title {
+  font-family: 'Playfair Display', serif;
+  font-size: 20px;
+  font-weight: 700;
+  line-height: 1.3;
+  color: var(--white);
+  margin-bottom: 16px;
+  flex: 1;
+}
+
+.cat-desc {
+  font-size: 14px;
+  line-height: 1.65;
+  color: var(--muted);
+  margin-bottom: 28px;
+}
+
+.cat-link {
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: var(--gold);
+  display: flex; align-items: center; gap: 8px;
+  transition: gap 0.3s;
+}
+.cat-card:hover .cat-link { gap: 12px; }
+
+/* ── JOIN SECTION ── */
+.join-section {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  min-height: 480px;
+  border-top: 1px solid var(--border-subtle);
+}
+
+.join-left {
+  background: var(--navy);
+  padding: 80px 72px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.join-title {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(32px, 3vw, 44px);
+  font-weight: 700;
+  line-height: 1.2;
+  color: var(--cream);
+  margin-bottom: 24px;
+}
+.join-title em { font-style: italic; color: var(--gold-light); }
+
+.join-desc {
+  font-size: 16px;
+  line-height: 1.75;
+  color: rgba(240,234,214,0.65);
+  margin-bottom: 48px;
+  max-width: 420px;
+}
+
+.join-right {
+  background: var(--bg3);
+  padding: 80px 72px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 36px;
+}
+
+.join-point { display: flex; flex-direction: column; gap: 6px; }
+.join-point-title {
+  font-family: 'Playfair Display', serif;
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--cream);
+  display: flex; align-items: center; gap: 12px;
+}
+.join-point-title::before {
+  content: '';
+  display: inline-block;
+  width: 8px; height: 8px;
+  border-radius: 50%;
+  background: var(--gold);
+  flex-shrink: 0;
+}
+.join-point-desc { font-size: 15px; color: var(--muted); line-height: 1.6; padding-left: 20px; }
+
+/* ── ABOUT SECTION ── */
+.about-section {
+  border-top: 1px solid var(--border-subtle);
+  padding: 100px 64px;
+  max-width: 1280px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr 1.5fr;
+  gap: 100px;
+  align-items: start;
+}
+
+.about-label {
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 4px;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 24px;
+}
+.about-heading {
+  font-family: 'Playfair Display', serif;
+  font-size: 36px;
+  font-weight: 700;
+  line-height: 1.2;
+  color: var(--white);
+  margin-bottom: 32px;
+}
+.about-heading em { font-style: italic; color: var(--gold); }
+.about-body { font-size: 15px; color: var(--cream-dim); line-height: 1.8; }
+
+.about-right { padding-top: 8px; }
+.about-stat-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2px; background: var(--border-subtle); border: 1px solid var(--border-subtle); margin-bottom: 36px; }
+.about-stat { background: var(--bg2); padding: 28px 32px; }
+.about-stat-num { font-family: 'Playfair Display', serif; font-size: 40px; font-weight: 700; color: var(--gold); margin-bottom: 6px; }
+.about-stat-label { font-size: 13px; color: var(--muted); letter-spacing: 0.3px; }
+.about-text { font-size: 15px; line-height: 1.8; color: var(--cream-dim); }
+
+/* ── FOOTER ── */
+footer {
+  border-top: 1px solid var(--border-subtle);
+  background: var(--bg2);
+  padding: 48px 64px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 24px;
+}
+.footer-logo { font-family: 'Playfair Display', serif; font-size: 20px; font-weight: 700; color: var(--cream); }
+.footer-logo span { color: var(--gold); font-style: italic; }
+.footer-links { display: flex; gap: 32px; }
+.footer-links a { font-size: 13px; color: var(--muted); text-decoration: none; transition: color 0.2s; }
+.footer-links a:hover { color: var(--gold); }
+.footer-copy { font-size: 12px; color: #444; }
+
+/* ── RESPONSIVE ── */
+@media(max-width:1024px) {
+  .hero-grid { grid-template-columns: 1fr; }
+  .hero-left { padding: 60px 40px; }
+  .hero-right { grid-column: auto; grid-template-columns: 1fr 1fr; }
+  .cat-grid { grid-template-columns: 1fr 1fr; }
+  .join-section { grid-template-columns: 1fr; }
+  .about-section { grid-template-columns: 1fr; gap: 48px; }
+  header { padding: 0 32px; }
+  .section { padding: 80px 40px; }
+}
+@media(max-width:680px) {
+  header { padding: 0 20px; }
+  nav { display: none; }
+  .hero-left { padding: 48px 24px; }
+  .hero-right { grid-template-columns: 1fr; }
+  .cat-grid { grid-template-columns: 1fr; }
+  .section { padding: 60px 24px; }
+  .join-left, .join-right { padding: 60px 32px; }
+  .about-section { padding: 60px 24px; }
+  footer { padding: 40px 24px; flex-direction: column; text-align: center; }
+  .footer-links { flex-wrap: wrap; justify-content: center; }
+}
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header>
+  <div class="logo">Econ<span>Mosaic</span></div>
+  <nav>
+    <a href="index.html">Home</a>
+    <a href="articles.html">Articles</a>
+    <a href="#">Reports</a>
+    <a href="#about">About</a>
+  </nav>
+  <button class="login-btn">
+    <img src="https://cdn-icons-png.flaticon.com/512/847/847969.png" alt="">
+    Log In
+  </button>
+</header>
+
+<!-- HERO -->
+<section class="hero-grid">
+  <div class="hero-left">
+    <p class="hero-eyebrow">Student Economics Platform · Madras University</p>
+    <h1 class="hero-title">
+      Where ideas<br>form a <em>mosaic</em>
+    </h1>
+    <p class="hero-desc">
+      A student-led space to write, analyze, and discuss economics — from Madras University to the world.
+    </p>
+    <div class="hero-actions">
+      <a href="articles.html" class="btn-primary">Read Articles →</a>
+      <a href="https://linktr.ee/econmosaic" target="_blank" class="btn-outline">Join EconMosaic</a>
+    </div>
+  </div>
+
+  <div class="hero-right">
+    <a href="articles1.html" class="feature-cell">
+      <div class="feature-icon">🌐</div>
+      <div>
+        <p class="feature-cat">International</p>
+        <h3 class="feature-title">Trade Barriers &amp; Supply Chain Shifts</h3>
+      </div>
+      <span class="feature-arrow">→</span>
+    </a>
+    <a href="articles2.html" class="feature-cell">
+      <div class="feature-icon">📈</div>
+      <div>
+        <p class="feature-cat">Markets</p>
+        <h3 class="feature-title">Stock Market Volatility in 2025</h3>
+      </div>
+      <span class="feature-arrow">→</span>
+    </a>
+    <a href="articles3.html" class="feature-cell">
+      <div class="feature-icon">🌾</div>
+      <div>
+        <p class="feature-cat">Agriculture</p>
+        <h3 class="feature-title">Climate's Cost on Indian Farming</h3>
+      </div>
+      <span class="feature-arrow">→</span>
+    </a>
+    <a href="articles4.html" class="feature-cell">
+      <div class="feature-icon">⚙️</div>
+      <div>
+        <p class="feature-cat">Industry</p>
+        <h3 class="feature-title">Manufacturing &amp; the PLI Scheme</h3>
+      </div>
+      <span class="feature-arrow">→</span>
+    </a>
+  </div>
+</section>
+
+<!-- MARQUEE -->
+<div class="marquee-wrap">
+  <div class="marquee-track">
+    <span><em>Economics</em> · Analysis</span>
+    <span>Student Research · <em>Madras University</em></span>
+    <span>Global Affairs · <em>Policy</em></span>
+    <span>Markets · Business · <em>Sustainability</em></span>
+    <span>Indian Economy · <em>Industry</em></span>
+    <span><em>Economics</em> · Analysis</span>
+    <span>Student Research · <em>Madras University</em></span>
+    <span>Global Affairs · <em>Policy</em></span>
+    <span>Markets · Business · <em>Sustainability</em></span>
+    <span>Indian Economy · <em>Industry</em></span>
+  </div>
+</div>
+
+<!-- WHAT WE OFFER -->
+<div class="section">
+  <p class="section-label">Explore by Category</p>
+  <h2 class="section-heading">What We <em>Offer</em></h2>
+
+  <div class="cat-grid">
+    <a href="articles1.html" class="cat-card">
+      <div class="cat-emoji">🌎</div>
+      <p class="cat-number">01 · Category</p>
+      <h3 class="cat-title">International Economy &amp; Global Affairs</h3>
+      <p class="cat-desc">Trade, geopolitics, IMF reports, and global economic shifts analysed through student perspectives.</p>
+      <span class="cat-link">Explore <i class="fa-solid fa-arrow-right"></i></span>
+    </a>
+    <a href="articles2.html" class="cat-card">
+      <div class="cat-emoji">🇮🇳</div>
+      <p class="cat-number">02 · Category</p>
+      <h3 class="cat-title">Indian Economy — National Issues, Policies &amp; Govt.</h3>
+      <p class="cat-desc">RBI, labour policy, government schemes, and India's economic trajectory — decoded.</p>
+      <span class="cat-link">Explore <i class="fa-solid fa-arrow-right"></i></span>
+    </a>
+    <a href="articles3.html" class="cat-card">
+      <div class="cat-emoji">🏭</div>
+      <p class="cat-number">03 · Category</p>
+      <h3 class="cat-title">Business &amp; Industry</h3>
+      <p class="cat-desc">Corporate case studies, sector deep-dives, and industry analysis from Maggi to Lenskart.</p>
+      <span class="cat-link">Explore <i class="fa-solid fa-arrow-right"></i></span>
+    </a>
+    <a href="articles4.html" class="cat-card">
+      <div class="cat-emoji">🌳</div>
+      <p class="cat-number">04 · Category</p>
+      <h3 class="cat-title">Environment &amp; Sustainability</h3>
+      <p class="cat-desc">Climate economics, green finance, SDGs, and sustainable development through an economic lens.</p>
+      <span class="cat-link">Explore <i class="fa-solid fa-arrow-right"></i></span>
+    </a>
+  </div>
+</div>
+
+<!-- JOIN SECTION -->
+<div class="join-section">
+  <div class="join-left">
+    <h2 class="join-title">Become a part of<br><em>the mosaic</em></h2>
+    <p class="join-desc">Whether you write, research, or just love a good economic debate — there's a tile here with your name on it.</p>
+    <a href="https://linktr.ee/econmosaic" target="_blank" class="btn-outline">Apply to join →</a>
+  </div>
+  <div class="join-right">
+    <div class="join-point">
+      <h4 class="join-point-title">Get Published</h4>
+      <p class="join-point-desc">Your work in the Madras University Library &amp; online</p>
+    </div>
+    <div class="join-point">
+      <h4 class="join-point-title">Build Your Portfolio</h4>
+      <p class="join-point-desc">Real bylines for CVs, LinkedIn &amp; applications</p>
+    </div>
+    <div class="join-point">
+      <h4 class="join-point-title">Learn by Doing</h4>
+      <p class="join-point-desc">Research, write, and get feedback from seniors</p>
+    </div>
+    <div class="join-point">
+      <h4 class="join-point-title">Open to All</h4>
+      <p class="join-point-desc">Any year, any background — curiosity is enough</p>
+    </div>
+  </div>
+</div>
+
+<!-- ABOUT SECTION -->
+<div id="about" class="about-section">
+  <div class="about-left">
+    <p class="about-label">About EconMosaic</p>
+    <h2 class="about-heading">Bridging the Asymmetry.<br><em>Building a Community.</em></h2>
+    <p class="about-body">EconMosaic is a growing community of students passionate about understanding the world through an economic lens. We provide a space where anyone — regardless of department — can write, analyse, question, and learn. Every contribution becomes a piece of a larger understanding — layered, diverse, and meaningful.</p>
+  </div>
+  <div class="about-right">
+    <div class="about-stat-grid">
+      <div class="about-stat">
+        <div class="about-stat-num">30+</div>
+        <div class="about-stat-label">Articles Published</div>
+      </div>
+      <div class="about-stat">
+        <div class="about-stat-num">4</div>
+        <div class="about-stat-label">Core Categories</div>
+      </div>
+      <div class="about-stat">
+        <div class="about-stat-num">2+</div>
+        <div class="about-stat-label">Magazines Released</div>
+      </div>
+      <div class="about-stat">
+        <div class="about-stat-num">∞</div>
+        <div class="about-stat-label">Ideas to Explore</div>
+      </div>
+    </div>
+    <p class="about-text">Founded at Madras University, EconMosaic operates as a student-run editorial collective. We cover everything from IMF policy updates to hyper-local economic stories — giving every contributor a platform to shape economic discourse.</p>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-logo">Econ<span>Mosaic</span></div>
+  <div class="footer-links">
+    <a href="index.html">Home</a>
+    <a href="articles.html">Articles</a>
+    <a href="articles1.html">International</a>
+    <a href="articles2.html">India</a>
+    <a href="articles3.html">Business</a>
+    <a href="articles4.html">Environment</a>
+    <a href="#about">About</a>
+  </div>
+  <p class="footer-copy">© 2025 EconMosaic · Madras University</p>
+</footer>
+
+</body>
+</html>
